@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Rent a Car - Signup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/common.js"></script>
+  </head>
+
+  <body class="login_bg">
+    <form>
+      <div class="container" id= "login_div">
+        <img src="/img/logo.png" alt="logo1" class="logo1" style="float:right;width:192px;height:155px;">
+        <h2>Sign Up</h2>
+
+        <hr>
+
+        <label for="name"><b>Name</b></label>
+        <input type="text" placeholder="Enter Name" id="name_field" onblur="onInputFieldChange(event)" required>
+        <p class="validation-message">Please fill name</p>
+
+        <label for="address"><b>Address</b></label>
+        <input type="text" placeholder="Enter Address" id="address_field" onblur="onInputFieldChange(event)" required>
+        <p class="validation-message">Please fill address</p>
+
+        <label for="Phone Number"><b>Phone Number</b></label>
+        <input type="number" placeholder="Enter Phone Number" id="phonenumber_field" maxlength="11" onblur="onInputFieldChange(event)" required>
+        <p class="validation-message">Please fill phone number</p>
+
+        <label for="Email"><b>Email</b></label>
+        <input type="email" placeholder="Enter Email" id="Email_field" onblur="validateEmail(event)" required>
+        <p class="validation-message">Please fill proper email</p>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="password_field" onblur="onInputFieldChange(event)" required>
+        <p class="validation-message">Please fill password</p>
+
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" id="confirm_password_field" onblur="onConfirmPasswordChange(event)" required>
+        <p class="validation-message">Password and Confirm Password are not same</p>
+
+        <label>
+          <input type="checkbox" checked="checked" style="margin-bottom:15px"><a href="#" style="color:dodgerblue">I agree to Terms & Privacy</a>
+        </label>
+        <p class="validation-message">Please Agree to Terms & Privacy</p>
+
+        <br>
+
+        <button class="signupbtn" id='btn-create-user' onclick="signUp(event)">Sign Up</button>
+
+        <button type="button" class="cancelbtn">Cancel</button>
+        <a type="button" class="signinbtn" href="/login">Login</a>
+      </div>
+    </form>
+  </body>
+</html>

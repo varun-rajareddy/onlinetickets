@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ========== Meta Tags ========== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="/css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/common.js"></script>
+  
+</head>
+
+<body class= "login_bg">
+
+<br>
+<br>
+  <div class="container" id="login_div">
+    <div class="imgcontainer">
+      <img src="/img/logo.png" alt="logo" class="logo1">
+    </div>
+
+
+     <label for="email_field"><b>Email</b></label>
+        <input type="email" placeholder="Enter Email" id="email_field" onblur="validateEmail(event)" required>
+        <p class="validation-message">Please fill email</p>
+
+        <label for="password_field"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="password_field" onblur="onInputFieldChange(event)" required>
+        <p class="validation-message">Please fill password</p>
+
+        
+
+    <button class= "login_btn"onclick="login(event)" class="loginbtn">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <a type="button" class="signinbtn" href="/signup">Sign Up</a>
+       <span class="psw"> <a href="#">Forgot password?</a></span>
+    </div>
+  </div>
+ 
+</body>
+
+</html>
+
+         
+
+
