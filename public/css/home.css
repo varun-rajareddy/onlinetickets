@@ -1,0 +1,16 @@
+img.logoimg {
+    margin-top: -33px;
+    margin-bottom: -26px;
+}
+
+button.btn.btn-outline-success.my-2.my-sm-0 {
+    margin: 20px;
+}
+
+
+.navbar-expand-lg .navbar-collapse {
+    display: flex!important;
+    flex-basis: auto;
+    font-weight: bold;
+}
+
