@@ -65,9 +65,11 @@ img.logo1 {
 }
 
 /* Add padding to containers */
-.container {
+.container_form {
   padding: 16px;
 }
+
+
 
 /* The "Forgot password" text */
 span.psw {
@@ -112,5 +114,21 @@ background-color: white;
 margin: 0px auto;
 box-shadow: 0px 0px 7px -4px;
 border-radius: 5px;
+}
+
+footer img {
+  width: 40px;
+  padding: 5px;
+}
+
+a {
+  cursor: pointer;
+}
+
+
+
+@media (min-width: 1200px)
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1265px;
 }
 

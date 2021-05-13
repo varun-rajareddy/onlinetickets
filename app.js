@@ -2,6 +2,8 @@ const express = require('express');
 const path = require("path");
 const cors = require('cors');
 const mysql = require('mysql');
+const https = require('https');
+
 
 const app = express();
 app.use(cors());
@@ -28,13 +30,20 @@ dbConnection.connect(function(err) {
   console.log("Database Connected!");
 });
 
-// App Routes
-app.get('/', (request, response) => {
-  response.render('home');
-})
+app.get('/', (req, res) => {
+  dbConnection.query(
+    `SELECT * from movies`,
+    (err, success) => {
+      if (err) throw err;
+
+      if (success) {
+        res.render('home', { movies: success });
+      }
+    }
+  );
+});
 
 
-// App Routes
 app.get('/login', (request, response) => {
   response.render('login');
 })
@@ -42,7 +51,6 @@ app.get('/login', (request, response) => {
 app.get('/signup', (request, response) => {
   response.render('signup');
 })
-
 
 app.post('/register', (req, res) => {
   dbConnection.query(
@@ -60,8 +68,6 @@ app.post('/register', (req, res) => {
   );
 });
 
-
-
 app.post('/loginUser', (req, res) => {
   dbConnection.query(
     `SELECT id, email, password, role FROM users where email='${req.body.email}'`,
@@ -77,6 +83,38 @@ app.post('/loginUser', (req, res) => {
 
 
 
+app.get('/admin', (req, res) => {
+  dbConnection.query(
+    `SELECT role from users where id='${req.query.userId}'`,
+    (err, success) => {
+      if (err) throw err;
+
+      if (success[0] && success[0].role === 'employee') {
+        dbConnection.query(
+          `SELECT * from movies`,
+          (err, success) => {
+            if (err) throw err;
+
+            if (success) {
+              res.render('admin-home', { movies: success });
+            }
+          }
+        )
+      } else {
+        dbConnection.query(
+          `SELECT * from movies`,
+          (err, success) => {
+            if (err) throw err;
+
+            if (success) {
+              res.render('home', { movies: success });
+            }
+          }
+        );
+      }
+    }
+  );
+})
 
 app.listen(process.env.port || 3000);
 console.log('Web Server is listening at port '+ (process.env.port || 3000));

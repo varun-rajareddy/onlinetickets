@@ -8,6 +8,26 @@ $(document).ready(function() {
     $('#logout').hide();
     $('#login').show();
   }
+
+  const headerNavElements = $('.header-nav').children();
+  const url = window.location.href;
+  const activeTab = url.substring(url.lastIndexOf('/')+1);
+
+  headerNavElements.each((index, element) => {
+    const linkElement = $(element).children();
+
+    if ($(linkElement).hasClass('active')) {
+      $(linkElement).toggleClass('active')
+    }
+
+    if ($(linkElement).hasClass(activeTab)) {
+      $(linkElement).addClass('active')
+    }
+
+    if (!activeTab && $(linkElement).hasClass('home')) {
+      $(linkElement).addClass('active')
+    }
+  })
 })
 
 function onInputFieldChange(event) {
@@ -23,9 +43,6 @@ function logout() {
   window.location.href = '/';
 }
 
-
-
-
 function validateEmail(event) {
   const email = event.target.value;
   const regexExp = /\S+@\S+\.\S+/;
@@ -35,8 +52,6 @@ function validateEmail(event) {
     $(event.target).next().addClass('toggle');
   }
 }
-
-
 
 function updateProfile(event) {
   event.preventDefault();
@@ -81,9 +96,6 @@ function updateProfile(event) {
     })
   });
 }
-
-
-
 class User {
   constructor(user_id, Name, Address,  PhoneNumber, Email, Password, role) {
     this.user_id = user_id;
@@ -95,8 +107,6 @@ class User {
   }
 }
 
-
-
 function onConfirmPasswordChange(event) {
   const password = $('#password_field').val();
   const confirmPassword = event.target.value;
@@ -107,11 +117,6 @@ function onConfirmPasswordChange(event) {
     $(event.target).next().removeClass('toggle');
   }
 }
-
-
-
-
-
 
 function signUp(event) {
   event.preventDefault();
@@ -150,14 +155,9 @@ function signUp(event) {
       return
     }
 
-    localStorage.setItem('userId', res.insertId);
-    window.location.href = '/';
+    window.location.href = '/login';
   });
 }
-
-
-
-
 
 function login(event) {
   event.preventDefault();
@@ -203,5 +203,23 @@ function login(event) {
     }
   });
 }
+
+
+
+
+function gotoHome() {
+  const role = localStorage.getItem('userRole')
+  console.log(0)
+   console.log(role, role ==='employee')
+  if(role ==='employee'){
+    const userId = localStorage.getItem('userId');
+    window.location.href =`/admin?userId=${userId}`;
+  }else{
+  window.location.href='/';
+  }
+}
+
+
+
 
 
