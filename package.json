@@ -6,10 +6,6 @@
   "scripts": {
     "start": "nodemon -e js,ejs,css,sql"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Thejaswiniy/my-show.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -22,9 +18,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
-  },
-  "bugs": {
-    "url": "https://github.com/Thejaswiniy/my-show/issues"
-  },
-  "homepage": "https://github.com/Thejaswiniy/my-show#readme"
+  }
 }

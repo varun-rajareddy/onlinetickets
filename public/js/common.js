@@ -77,11 +77,12 @@ function updateProfile(event) {
 
   const Name = $('#name_field').val();
   const Address = $('#address_field').val();
-  const DL_N = $('#DL_field').val();
   const PhoneNumber = $('#phonenumber_field').val();
   const Email = $('#Email_field').val();
+  const Password = $('#password_field').val();
+const confirmPassword = $('#confirm_password_field').val();
 
-  if (!Name || !Address || !DL_N || !PhoneNumber || !Email) {
+  if (!Name || !Address || !PhoneNumber || !Email || !Password) {
     alert('Please fill the fields properly');
 
     return;
@@ -92,9 +93,16 @@ function updateProfile(event) {
 
     return
   }
+  
+  if (Password !== confirmPassword) {
+    alert('Password and Confirm Password are not same');
+
+    return
+  }
+
 
   const userId = localStorage.getItem('userId')
-  const user = {userId, Name, Address, DL_N, PhoneNumber, Email};
+  const user = {userId, Name, Address, PhoneNumber, Email, Password};
 
   $.post(`${url}/update_profile`, user, (res) => {
     if (res?.code === 'ER_DUP_ENTRY') {

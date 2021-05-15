@@ -139,7 +139,7 @@ app.get('/admin', (req, res) => {
 
 app.get('/profile', (req, res) => {
   dbConnection.query(
-    `SELECT name, address, phone_number, email, role FROM users WHERE id='${req.query.userId}'`,
+    `SELECT name, address, phone_number, email, password ,role FROM users WHERE id='${req.query.userId}'`,
     (err, success) => {
       if (err) throw err;
 
@@ -148,6 +148,22 @@ app.get('/profile', (req, res) => {
       }
     }
   )
+});
+
+app.post('/update_profile', (req, res) => {
+  dbConnection.query(
+    `UPDATE users SET name='${req.body.Name}', address='${req.body.Address}', phone_number='${req.body.PhoneNumber}', email='${req.body.Email}', password='${req.body.Password}' WHERE id='${req.body.userId}'`,
+    (err, success) => {
+      if (err) {
+        res.send(err);
+      };
+
+      if (success) {
+      
+        res.send(success)
+      }
+    }
+  );
 });
 
 
