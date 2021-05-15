@@ -298,3 +298,12 @@ function viewMyCustomers() {
 
   window.location.href = `/customer_profiles`;
 }
+
+function deleteMovie(movieId) {
+  $.post(`${url}/delete_movie`, { movieId }, (res) => {
+    const userId = localStorage.getItem('userId');
+
+    window.location.href = `/admin?userId=${userId}`;
+    alert('Deleted Movie successfully')
+  })
+}

@@ -139,7 +139,7 @@ app.get('/admin', (req, res) => {
 
 app.get('/profile', (req, res) => {
   dbConnection.query(
-    `SELECT name, address, phone_number, email, password, role FROM users WHERE id='${req.query.userId}'`,
+    `SELECT name, address, phone_number, email, role FROM users WHERE id='${req.query.userId}'`,
     (err, success) => {
       if (err) throw err;
 
@@ -149,7 +149,6 @@ app.get('/profile', (req, res) => {
     }
   )
 });
-
 
 
 
@@ -171,6 +170,21 @@ app.post('/create_movie', (req, res) => {
     }
   );
 });
+
+app.post('/delete_movie', (req, res) => {
+  dbConnection.query(
+    `DELETE FROM movies where id='${req.body.movieId}'`,
+    (err, success) => {
+      if (err) {
+        res.send(err);
+      };
+
+      if (success) {
+        res.send(success)
+      }
+    }
+  )
+})
 
 app.get('/customer_profiles', (req, res) => {
   dbConnection.query(
