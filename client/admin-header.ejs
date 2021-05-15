@@ -6,13 +6,16 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" onclick="loadNowPlayingMovies()"><img src="/img/logo.png" class="logoimg" alt="Logo" width="150px" margin-top="-33px" margin-bottom= "-26px"></a>
+        <a class="navbar-brand" onclick="gotoHome()"><img src="/img/logo.png" class="logoimg" alt="Logo" width="150px" margin-top="-33px" margin-bottom= "-26px"></a>
         <ul class="header-nav navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link text-uppercase font-weight-bolder home active" aria-current="page" href="/">Movies</a>
+            <a class="nav-link text-uppercase font-weight-bolder admin" aria-current="page" onclick="gotoHome()">Movies</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-uppercase font-weight-bold upcoming-movies" onclick="showUpcomingMovies()">Upcoming Movies</a>
+            <a class="nav-link text-uppercase font-weight-bold customers" onclick="()">Customers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-uppercase font-weight-bold create_movie" onclick="createMovie()">Add Movies</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-uppercase font-weight-bold profile" onclick="getProfile()">Profile</a>
@@ -31,9 +34,9 @@
         </div>
 
         <form class="d-flex">
-          <a class="nav-link text-uppercase font-weight-bold " href="#">
+          <!-- <a class="nav-link text-uppercase font-weight-bold " href="#">
             <img src="/img/Cart.png" width="30" height= "30"class="mx-3">
-          </a>
+          </a> -->
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onchange="onSearch(event)">
         </form>
 
@@ -47,4 +50,3 @@
     </div>
   </nav>
 </header>
-

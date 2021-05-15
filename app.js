@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const dbConnection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'rootroot',
+  password: 'Theja@0912',
   database : 'my_shows_db',
   port: 3306
 });
@@ -132,6 +132,21 @@ app.get('/admin', (req, res) => {
     }
   );
 })
+
+
+
+app.get('/profile', (req, res) => {
+  dbConnection.query(
+    `SELECT name, address, phone_number, email, role FROM users WHERE id='${req.query.userId}'`,
+    (err, success) => {
+      if (err) throw err;
+
+      if (success) {
+        res.render('profile', { user: success[0] })
+      }
+    }
+  )
+});
 
 
 

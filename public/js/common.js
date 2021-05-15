@@ -11,7 +11,15 @@ $(document).ready(function() {
 
   const headerNavElements = $('.header-nav').children();
   const url = window.location.href;
-  const activeTab = url.substring(url.lastIndexOf('/')+1);
+  const isQueryParamsExist = url.lastIndexOf('?');
+
+  let activeTab = url.substring(url.lastIndexOf('/')+1);
+
+  if (isQueryParamsExist !== -1) {
+    activeTab = url.substring(url.lastIndexOf('/')+1, isQueryParamsExist);
+  }
+
+  console.log('activeTab', activeTab);
 
   headerNavElements.each((index, element) => {
     const linkElement = $(element).children();
@@ -24,7 +32,7 @@ $(document).ready(function() {
       $(linkElement).addClass('active')
     }
 
-    if (!activeTab && $(linkElement).hasClass('home')) {
+    if (!activeTab && ($(linkElement).hasClass('home') || $(linkElement).hasClass('admin'))) {
       $(linkElement).addClass('active')
     }
   })
@@ -52,6 +60,17 @@ function validateEmail(event) {
     $(event.target).next().addClass('toggle');
   }
 }
+
+function profile() {
+  const userId = localStorage.getItem('userId');
+  if(!userId){
+    window.location.href='/login'
+    return;
+  }
+  window.location.href = `/profile?userId=${userId}`;
+}
+
+
 
 function updateProfile(event) {
   event.preventDefault();
@@ -264,5 +283,14 @@ function submitCreateMovie(event) {
   })
 }
 
+function getProfile() {
+  const userId = localStorage.getItem('userId');
+
+  if(!userId){
+    window.location.href='/login'
+    return;
+  }
+  window.location.href = `/profile?userId=${userId}`;
+}
 
 
