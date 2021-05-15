@@ -13,7 +13,7 @@
     <script src="/js/home.js"></script>
     <script src="/js/common.js"></script>
   </head>
-  <body>
+  <body class="login_bg">
 
     <% if (user.role==='employee') { %>
       <%- include('admin-header') -%>
@@ -22,6 +22,7 @@
     <% if (user.role==='customer') { %>
       <%- include('header') -%>
     <% } %>
+    <br>
 
     <div class="container_form" id= "login_div">
       <h1>Profile</h1>
@@ -37,19 +38,19 @@
         <p class="validation-message">Please fill address</p>
 
         <label for="Phone Number"><b>Phone Number</b></label>
-        <input type="text" placeholder="Enter Phone Number" id="phonenumber_field" maxlength="11" onblur="onInputFieldChange(event)" required>
+        <input type="text" placeholder="Enter Phone Number" id="phonenumber_field" maxlength="11" value="<%=user.phone_number%>" onblur="onInputFieldChange(event)" required>
         <p class="validation-message">Please fill phone number</p>
 
         <label for="Email"><b>Email</b></label>
-        <input type="email" placeholder="Enter Email" id="Email_field" onblur="validateEmail(event)" required>
+        <input type="email" placeholder="Enter Email" id="Email_field" value="<%=user.email%>"  onblur="validateEmail(event)" required>
         <p class="validation-message">Please fill proper email</p>
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" id="password_field" onblur="onInputFieldChange(event)" required>
+        <input type="password" placeholder="Enter Password" id="password_field" value="<%=user.password%>" onblur="onInputFieldChange(event)" required>
         <p class="validation-message">Please fill password</p>
 
         <label for="psw-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" id="confirm_password_field" onblur="onConfirmPasswordChange(event)" required>
+        <input type="password" placeholder="Repeat Password" id="confirm_password_field"  value="<%=user.password%>" onblur="onConfirmPasswordChange(event)" required>
         <p class="validation-message">Password and Confirm Password are not same</p>
 
       <button class="updatebtn" type="button" onclick="updateProfile(event)">Update</button>
@@ -57,7 +58,7 @@
 
 
     </div>
-
+<br>
 
     <%- include('footer'); -%>
   </body>

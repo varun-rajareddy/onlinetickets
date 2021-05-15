@@ -23,27 +23,41 @@
 
       <hr>
       <label for="name"><b>Name</b></label>
-      <input type="text" placeholder="Enter Car Name" id="name" onblur="onInputFieldChange(event)" required>
-      <p class="validation-message">Please fill name</p>
+      <input type="text" placeholder="Enter movie Name" id="name" onblur="onInputFieldChange(event)" required>
+      <p class="validation-message">Please fill Name</p>
 
       <label for="color"><b>Description</b></label>
       <input type="text" placeholder="Enter movie description" id="description" onblur="onInputFieldChange(event)" required>
-      <p class="validation-message">Please fill color</p>
+      <p class="validation-message">Please fill Description</p>
 
-      <label for="type"><b>Type</b></label>
-      <input type="text" placeholder="Enter movie type" id="type" required onblur="onInputFieldChange(event)">
-      <p class="validation-message">Please fill brand</p>
+      <label for="type"><b>Genre</b></label>
+      <p>
+        <select name="genre" class="btn btn-secondary" id="genre" onchange="onInputFieldChange(event)">
+          <option disabled selected value=''>Genre</option>
+          <% ['action', 'adventure', 'animation', 'comedy', 'family', 'fantasy', 'horror', 'romance','thriller'].forEach(genre => { %>
+            <option value="<%= genre %>" class="dropdown-options"><%= genre %></option>
+          <% }) %>
+        </select>
+      </p>
+      <p class="validation-message">Please select Genre</p>
 
       <label for="model"><b>Language</b></label>
-      <input type="text" placeholder="Enter movie Language" id="language" onblur="onInputFieldChange(event)" required>
-      <p class="validation-message">Please fill Language</p>
+      <p>
+        <select name="language" class="btn btn-secondary" id="language" onchange="onInputFieldChange(event)">
+          <option disabled selected value=''>Language</option>
+          <% ['english', 'french', 'hindi'].forEach(language => { %>
+            <option value="<%= language %>" class="dropdown-options"><%= language %></option>
+          <% }) %>
+        </select>
+      </p>
+      <p class="validation-message">Please select Language</p>
 
       <label for="amount"><b>Amount per ticket</b></label>
       <input type="number" placeholder="Enter ticket Amount" id="amount" min="0" minlength="4" maxlength="4" onblur="onInputFieldChange(event)" required>
       <p class="validation-message">Please fill ticket price</p>
 
       <label for="image_name"><b>Image Name</b></label>
-      <input type="text" placeholder="Enter Car Image Name" id="image_name" onblur="onInputFieldChange(event)" required>
+      <input type="text" placeholder="Enter movie Image Name" id="image_name" onblur="onInputFieldChange(event)" required>
       <p class="validation-message">Please fill Movie Image Name</p>
 
       <br>
@@ -51,8 +65,8 @@
       <button class="login_btn" type="button" onclick="submitCreateMovie(event)">ADD</button>
     </div>
 
-<br>
-<br>
+    <br>
+    <br>
 
     <%- include('footer'); -%>
   </body>

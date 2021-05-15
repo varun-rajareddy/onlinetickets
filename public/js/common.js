@@ -262,17 +262,17 @@ function submitCreateMovie(event) {
 
   const name = $('#name').val();
   const description = $('#description').val();
-  const type = $('#type').val();
+  const genre = $('#genre').val();
   const language = $('#language').val();
   const amount = $('#amount').val();
   const imageName = $('#image_name').val();
 
-  if (!name || !description || !type || !language || !amount || !imageName) {
+  if (!name || !description || !genre || !language || !amount || !imageName) {
     alert('Please fill all fields properly');
     return;
   }
 
-  const movie = { name, description, type, language, amount, imageName };
+  const movie = { name, description, genre, language, amount, imageName };
   console.log(movie);
 
   $.post(`${url}/create_movie`, movie, (res) => {
@@ -293,4 +293,8 @@ function getProfile() {
   window.location.href = `/profile?userId=${userId}`;
 }
 
+function viewMyCustomers() {
+  const userId = localStorage.getItem('userId');
 
+  window.location.href = `/customer_profiles`;
+}

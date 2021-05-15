@@ -139,7 +139,7 @@ app.get('/admin', (req, res) => {
 
 app.get('/profile', (req, res) => {
   dbConnection.query(
-    `SELECT name, address, phone_number, email, role FROM users WHERE id='${req.query.userId}'`,
+    `SELECT name, address, phone_number, email, password, role FROM users WHERE id='${req.query.userId}'`,
     (err, success) => {
       if (err) throw err;
 
@@ -160,7 +160,7 @@ app.get('/create_movie', (req, res) => {
 
 app.post('/create_movie', (req, res) => {
   dbConnection.query(
-    `INSERT INTO movies (name, description, type, language, amount, image_name) VALUES ('${req.body.name}', '${req.body.description}', '${req.body.type}', '${req.body.language}', '${req.body.amount}', '${req.body.imageName}')`,
+    `INSERT INTO movies (name, description, genre, language, amount, image_name) VALUES ('${req.body.name}', '${req.body.description}', '${req.body.genre}', '${req.body.language}', '${req.body.amount}', '${req.body.imageName}')`,
     (err, success) => {
       if (err) {
         res.send(err);
@@ -172,7 +172,18 @@ app.post('/create_movie', (req, res) => {
   );
 });
 
+app.get('/customer_profiles', (req, res) => {
+  dbConnection.query(
+    `SELECT users.name, users.address, users.phone_number, users.email FROM users where users.role='customer'`,
+    (err, success) => {
+      if (err) throw err;
 
+      if (success) {
+        res.render('customer-profiles', { profiles: success })
+      }
+    }
+  )
+})
 
 app.listen(process.env.port || 3000);
 console.log('Web Server is listening at port '+ (process.env.port || 3000));
