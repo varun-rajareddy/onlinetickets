@@ -221,5 +221,48 @@ function gotoHome() {
 
 
 
+function admin_profile() {
+  const userId = localStorage.getItem('userId');
+  if(!userId){
+    window.location.href='/login'
+    return;
+  }
+  window.location.href = `/admin-profile?userId=${userId}`;
+}
+
+
+
+function createMovie() {
+  window.location.href = '/create_movie'
+}
+
+
+
+function submitCreateMovie(event) {
+  event.preventDefault();
+
+  const name = $('#name').val();
+  const description = $('#description').val();
+  const type = $('#type').val();
+  const language = $('#language').val();
+  const amount = $('#amount').val();
+  const imageName = $('#image_name').val();
+
+  if (!name || !description || !type || !language || !amount || !imageName) {
+    alert('Please fill all fields properly');
+    return;
+  }
+
+  const movie = { name, description, type, language, amount, imageName };
+  console.log(movie);
+
+  $.post(`${url}/create_movie`, movie, (res) => {
+    const userId = localStorage.getItem('userId');
+    window.location.href = `/admin?userId=${userId}`;
+
+    alert('Created Movie successfully')
+  })
+}
+
 
 

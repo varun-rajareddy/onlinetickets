@@ -9,6 +9,22 @@
 }
 
 
+
+   a.active {
+    background-color:#6c757d;
+    color: #fff;
+    border-radius: 8px;
+
+  }
+
+
+  .navbar a:hover {
+    background-color: #ddd;
+    color: black;
+    font-family:cursive;
+  }
+
+
 /* Full-width inputs */
 input[type=email], input[type=password], input[type=text], input[type=number]{
   width: 100%;

@@ -1,4 +1,20 @@
+function loadUpcomingMovies(type) {
+  let pageNumber = Number(localStorage.getItem('pageNumber')) || 1;
+  pageNumber = type == 'prev' ? pageNumber - 1 : pageNumber + 1;
 
+  if (pageNumber >= 1) {
+    localStorage.setItem('pageNumber', pageNumber);
+
+    window.location.href = `/?page=${pageNumber}`;
+  }
+}
+
+
+
+
+function showUpcomingMovies() {
+  window.location.href = '/upcoming-movies';
+}
 
 function loadNowPlayingMovies() {
   window.location.href = '/';

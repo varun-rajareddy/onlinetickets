@@ -43,6 +43,23 @@ app.get('/', (req, res) => {
   );
 });
 
+// App Routes
+app.get('/upcoming-movies', (req, res) => {
+  const pageNumber = req.query.page;
+
+  https.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=0e73c053f96903f9c84cf94862fc7e08&page=${pageNumber}`, (resp) => {
+    let data = '';
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    resp.on('end', () => {
+      res.render('upcoming-movies', { movies: JSON.parse(data) });
+    });
+  }).on("error", (err) => {
+    console.log("Error: " + err.message);
+  });
+});
 
 app.get('/login', (request, response) => {
   response.render('login');
@@ -115,6 +132,30 @@ app.get('/admin', (req, res) => {
     }
   );
 })
+
+
+
+
+app.get('/create_movie', (req, res) => {
+  res.render('create-movie');
+});
+
+
+app.post('/create_movie', (req, res) => {
+  dbConnection.query(
+    `INSERT INTO movies (name, description, type, language, amount, image_name) VALUES ('${req.body.name}', '${req.body.description}', '${req.body.type}', '${req.body.language}', '${req.body.amount}', '${req.body.imageName}')`,
+    (err, success) => {
+      if (err) {
+        res.send(err);
+      };
+      if (success) {
+        res.send(success)
+      }
+    }
+  );
+});
+
+
 
 app.listen(process.env.port || 3000);
 console.log('Web Server is listening at port '+ (process.env.port || 3000));

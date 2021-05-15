@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Rent a Car</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/general.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/jscript/general.js"></script>
+  </head>
+<body>
+  <div class="logo">
+    <a onclick="gotoHome()"><img src="/img/logo.jpg"  alt="logo"></a>
+  </div>
+
+  <div class="navbar" id="myTopnav">
+    <a onclick="gotoHome()" >Home</a>
+    <a onclick="admin_profile()">Profile</a>
+    <a onclick="viewMyCustomers()" class="active1">My Customers</a>
+    <a onclick="manageReturns()">Manage returns</a>
+    <a onclick="createCar()">Create Car</a>
+    <a class="right" id="logout" onclick="logout()">Logout</a>
+    <a href="/login" class="right" id="login">Login</a>
+  </div>
+
+  <div class="row">
+    <div class="main">
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Driving License</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% if (profiles.length === 0) { %>
+              <tr>
+                <td colspan='100%'>No Customer profiles found</td>
+              </tr>
+            <% } %>
+            <% profiles.forEach(user => { %>
+              <tr>
+                <td><%=user.name%></td>
+                <td><%=user.address%></td>
+                <td><%=user.driving_license%></td>
+                <td><%=user.phone_number%></td>
+                <td><%=user.email%></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
