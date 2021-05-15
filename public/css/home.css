@@ -26,7 +26,7 @@ button.btn.btn-outline-success.my-2.my-sm-0 {
 }
 
 .movie-list.card {
-  display: inline-block;
+  display: none;
   width: 25%;
   padding: 10px;
   margin: 20px;
@@ -43,4 +43,18 @@ button.btn.btn-outline-success.my-2.my-sm-0 {
 .main-content {
   height: 100%;
   overflow: auto;
+}
+
+.dropdown-menu {
+  max-height: 40vh;
+  overflow: auto;
+}
+
+select {
+  width: 120px;
+  text-transform: capitalize !important;
+}
+
+select:hover, select:focus {
+  outline: none;
 }

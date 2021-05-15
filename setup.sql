@@ -20,15 +20,15 @@ CREATE TABLE `movies` (
   `id` INT NOT NULL auto_increment UNIQUE,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(45),
-  `type` VARCHAR(45) NOT NULL,
+  `genre` VARCHAR(45) NOT NULL,
   `language` VARCHAR(45) NOT NULL,
   `amount` DOUBLE NOT NULL,
   `image_name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
-INSERT INTO movies(name, description, image_name, type, language, amount) VALUES ('moive1', 'This is about movie1', 'movie1.jpg', 'comedy','telugu',100);
-INSERT INTO movies(name, description, image_name, type, language, amount) VALUES ('moive2', 'This is about movie2', 'movie2.jpg', 'comedy','english',100);
-INSERT INTO movies(name, description, image_name, type, language, amount) VALUES ('moive3', 'This is about movie3', 'movie3.jpg', 'comedy','hindi',100);
+INSERT INTO movies(name, description, image_name, genre, language, amount) VALUES ('moive1', 'This is about movie1', 'movie1.jpg', 'comedy','telugu',100);
+INSERT INTO movies(name, description, image_name, genre, language, amount) VALUES ('moive2', 'This is about movie2', 'movie2.jpg', 'action','english',100);
+INSERT INTO movies(name, description, image_name, genre, language, amount) VALUES ('moive3', 'This is about movie3', 'movie3.jpg', 'horror','hindi',100);
 
 
 -- -----------------------------------------------------

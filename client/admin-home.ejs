@@ -20,42 +20,36 @@
       <div class="row content">
         <div class="col-sm-2 sidenav">
           <h4>Filter :</h4>
+          <p><button class="btn btn-secondary" onclick="filterSelection('all')">Show all</button></p>
+
           <p>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Language
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item" href="#">English</a></li>
-                <li><a class="dropdown-item" href="#">French</a></li>
-                <li><a class="dropdown-item" href="#">Hindi</a></li>
-              </ul>
-            </div>
-          </p>
-          <p>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Genres
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Comedy</a></li>
-              </ul>
-            </div>
+            <select name="language" class="btn btn-secondary" id="language" onchange="filterSelection(event.target.value)">
+              <option disabled selected value=''>Language</option>
+              <% ['english', 'french', 'hindi'].forEach(language => { %>
+                <option value="<%= language %>" class="dropdown-options"><%= language %></option>
+              <% }) %>
+            </select>
           </p>
 
+          <p>
+            <select name="genre" class="btn btn-secondary" id="genre" onchange="filterSelection(event.target.value)">
+              <option disabled selected value=''>Genre</option>
+              <% ['action', 'adventure', 'animation', 'comedy', 'family', 'fantasy', 'horror', 'romance','thriller'].forEach(genre => { %>
+                <option value="<%= genre %>" class="dropdown-options"><%= genre %></option>
+              <% }) %>
+            </select>
+          </p>
         </div>
 
         <div class="col-sm-10 text-left main-content">
           <div class="col-md-12">
             <% movies.forEach(movie => { %>
-              <div class="card movie-list <%=movie.image_name%>">
+              <div class="card movie-list filterDiv <%=movie.image_name%> <%=movie.genre%> <%=movie.language%>">
                 <img src="/images/<%=movie.image_name%>" class="card-img-top w-75 mx-auto" alt="<%=movie.image_name%>">
                 <div class="card-body p-2">
                   <h5 class="card-title mb-1"><%=movie.name%></h5>
-                  <!-- <p class="card-text mb-1"><span class="float-right"><%=movie.overview%></span></p> -->
-                  <button class="btn btn-sm btn-info">Delete</button>
-                  <button class="btn btn-sm btn-info">Update</button>
+                  <p class="card-text mb-1"><span class="float-right"><%=movie.description%></span></p>
+                  <button class="btn btn-sm btn-info">Book Now</button>
                 </div>
               </div>
             <% }) %>

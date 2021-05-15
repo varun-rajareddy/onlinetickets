@@ -1,3 +1,14 @@
+function loadMovies(type) {
+  let pageNumber = Number(localStorage.getItem('pageNumber')) || 1;
+  pageNumber = type == 'prev' ? pageNumber - 1 : pageNumber + 1;
+
+  if (pageNumber >= 1) {
+    localStorage.setItem('pageNumber', pageNumber);
+
+    window.location.href = `/?page=${pageNumber}`;
+  }
+}
+
 function loadUpcomingMovies(type) {
   let pageNumber = Number(localStorage.getItem('pageNumber')) || 1;
   pageNumber = type == 'prev' ? pageNumber - 1 : pageNumber + 1;
@@ -9,10 +20,8 @@ function loadUpcomingMovies(type) {
   }
 }
 
-
-
-
 function showUpcomingMovies() {
+  localStorage.setItem('pageNumber', 1);
   window.location.href = '/upcoming-movies';
 }
 
@@ -20,21 +29,37 @@ function loadNowPlayingMovies() {
   window.location.href = '/';
 }
 
-function onSearch(event) {
-  const value = event.target.value.split(' ').join('-').toLowerCase();
-  console.log('value', value);
+$(document).ready(function(){
+  filterSelection('all')
 
-  const movies = document.getElementsByClassName("movie-list");
+  $("#search").on("keyup", function() {
+    const value = $(this).val().split(' ').join('-').toLowerCase();
 
-  for (let i = 0; i < movies.length; i++) {
-    w3RemoveClass(movies[i], "show");
-    if (movies[i].className.includes(value)) {
-      w3RemoveClass(movies[i], "hide");
-      w3AddClass(movies[i], "show");
-    } else {
+    const movies = document.getElementsByClassName("movie-list");
+
+    for (let i = 0; i < movies.length; i++) {
       w3RemoveClass(movies[i], "show");
-      w3AddClass(movies[i], "hide");
+      if (movies[i].className.includes(value)) {
+        w3RemoveClass(movies[i], "hide");
+        w3AddClass(movies[i], "show");
+      } else {
+        w3RemoveClass(movies[i], "show");
+        w3AddClass(movies[i], "hide");
+      }
     }
+  });
+});
+
+function filterSelection(c) {
+  console.log(c);
+  if (!c) return;
+
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
   }
 }
 

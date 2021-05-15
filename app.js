@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const dbConnection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'Theja@0912',
+  password: 'rootroot',
   database : 'my_shows_db',
   port: 3306
 });
@@ -31,8 +31,10 @@ dbConnection.connect(function(err) {
 });
 
 app.get('/', (req, res) => {
+  const pageNumber = ((req.query.page || 1) - 1) * 10;
+
   dbConnection.query(
-    `SELECT * from movies`,
+    `SELECT * FROM movies LIMIT 10 OFFSET ${pageNumber}`,
     (err, success) => {
       if (err) throw err;
 
