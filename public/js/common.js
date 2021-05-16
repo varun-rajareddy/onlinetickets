@@ -63,7 +63,7 @@ function validateEmail(event) {
 
 function validatePhoneNumber(event) {
    const PhoneNumber = event.target.value;
-  const regexExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  const regexExp = /^\d{10}$/;
   if (regexExp.test(PhoneNumber)) {
      $(event.target).next().removeClass('toggle');
   } else {
@@ -173,7 +173,7 @@ function signUp(event) {
     return;
   }
 
-  if (/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(PhoneNumber)) {
+  if (!/^\d{10}$/.test(PhoneNumber)) {
     alert('Please enter proper Phone Number');
 
     return
