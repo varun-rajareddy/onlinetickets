@@ -61,6 +61,18 @@ function validateEmail(event) {
   }
 }
 
+function validatePhoneNumber(event) {
+   const PhoneNumber = event.target.value;
+  const regexExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  if (regexExp.test(PhoneNumber)) {
+     $(event.target).next().removeClass('toggle');
+  } else {
+    $(event.target).next().addClass('toggle');
+  }
+}
+
+
+
 function profile() {
   const userId = localStorage.getItem('userId');
   if(!userId){
@@ -161,6 +173,12 @@ function signUp(event) {
     return;
   }
 
+  if (/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(PhoneNumber)) {
+    alert('Please enter proper Phone Number');
+
+    return
+  }
+
   if (!/\S+@\S+\.\S+/.test(Email)) {
     alert('Please enter proper email');
 
@@ -203,6 +221,8 @@ function login(event) {
 
     return
   }
+
+
 
   const loginParams = {email, password};
 

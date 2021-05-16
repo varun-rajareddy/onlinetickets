@@ -28,7 +28,7 @@
         <p class="validation-message">Please fill address</p>
 
         <label for="Phone Number"><b>Phone Number</b></label>
-        <input type="text" placeholder="Enter Phone Number" id="phonenumber_field" maxlength="11" onblur="onInputFieldChange(event)" required>
+        <input type="text" placeholder="Enter Phone Number" id="phonenumber_field" pattern="^\d{10}$" maxlength="11" onblur="onInputFieldChange(event)" required>
         <p class="validation-message">Please fill phone number</p>
 
         <label for="Email"><b>Email</b></label>

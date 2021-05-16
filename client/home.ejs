@@ -26,7 +26,7 @@
           <p>
             <select name="language" class="btn btn-secondary" id="language" onchange="filterSelection(event.target.value)">
               <option disabled selected value=''>Language</option>
-              <% ['english', 'french', 'hindi'].forEach(language => { %>
+              <% ['English', 'French', 'Hindi', 'Telugu'].forEach(language => { %>
                 <option value="<%= language %>" class="dropdown-options"><%= language %></option>
               <% }) %>
             </select>
@@ -35,7 +35,7 @@
           <p>
             <select name="genre" class="btn btn-secondary" id="genre" onchange="filterSelection(event.target.value)">
               <option disabled selected value=''>Genre</option>
-              <% ['action', 'adventure', 'animation', 'comedy', 'family', 'fantasy', 'horror', 'romance','thriller'].forEach(genre => { %>
+              <% ['Action', 'Adventure', 'Animation', 'Comedy', 'Family', 'Fantasy', 'Horror', 'Romance','Thriller'].forEach(genre => { %>
                 <option value="<%= genre %>" class="dropdown-options"><%= genre %></option>
               <% }) %>
             </select>
@@ -50,6 +50,10 @@
                 <div class="card-body p-2">
                   <h5 class="card-title mb-1"><%=movie.name%></h5>
                   <p class="card-text mb-1"><span class="float-right"><%=movie.description%></span></p>
+                   <p class="card-text mb-1"><span class="float-right"><b>Price per ticket: </b>$<%=movie.amount%></P>
+                    <p class="card-text mb-1"><span class="float-right"><b>Language: </b><%=movie.language%></P>
+      <p class="card-text mb-1"><span class="float-right"><b>Genre: </b><%=movie.genre%></P>
+
                   <button class="btn btn-sm btn-info">Book Now</button>
                 </div>
               </div>

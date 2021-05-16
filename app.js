@@ -31,10 +31,10 @@ dbConnection.connect(function(err) {
 });
 
 app.get('/', (req, res) => {
-  const pageNumber = ((req.query.page || 1) - 1) * 10;
+  const pageNumber = ((req.query.page || 1) - 1) * 9;
 
   dbConnection.query(
-    `SELECT * FROM movies LIMIT 10 OFFSET ${pageNumber}`,
+    `SELECT * FROM movies LIMIT 9 OFFSET ${pageNumber}`,
     (err, success) => {
       if (err) throw err;
 
@@ -44,6 +44,8 @@ app.get('/', (req, res) => {
     }
   );
 });
+
+
 
 // App Routes
 app.get('/upcoming-movies', (req, res) => {
@@ -62,6 +64,9 @@ app.get('/upcoming-movies', (req, res) => {
     console.log("Error: " + err.message);
   });
 });
+
+
+
 
 app.get('/login', (request, response) => {
   response.render('login');
