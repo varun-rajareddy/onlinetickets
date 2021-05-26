@@ -23,11 +23,11 @@
 
       <hr>
       <label for="name"><b>Name</b></label>
-      <input type="text" placeholder="Enter movie Name" id="name" onblur="onInputFieldChange(event)" required>
+      <input type="text" placeholder="Enter movie Name" id="name" onblur="onInputFieldChange(event)"  value="<%= movies.name %>" required>
       <p class="validation-message">Please fill Name</p>
 
       <label for="color"><b>Description</b></label>
-      <input type="text" placeholder="Enter movie description" id="description" onblur="onInputFieldChange(event)" required>
+      <input type="text" placeholder="Enter movie description" id="description" onblur="onInputFieldChange(event)" value="<%=movies.description%>" required>
       <p class="validation-message">Please fill Description</p>
 
       <label for="type"><b>Genre</b></label>
@@ -53,11 +53,11 @@
       <p class="validation-message">Please select Language</p>
 
       <label for="amount"><b>Amount per ticket</b></label>
-      <input type="number" placeholder="Enter ticket Amount" id="amount" min="0" minlength="4" maxlength="4" onblur="onInputFieldChange(event)" required>
+      <input type="number" placeholder="Enter ticket Amount" id="amount" min="0" minlength="4" maxlength="4" onblur="onInputFieldChange(event)"  value="<%=movies.amount%>" required>
       <p class="validation-message">Please fill ticket price</p>
 
       <label for="image_name"><b>Image Name</b></label>
-      <input type="text" placeholder="Enter movie Image Name" id="image_name" onblur="onInputFieldChange(event)" required>
+      <input type="text" placeholder="Enter movie Image Name" id="image_name" onblur="onInputFieldChange(event)"   value="<%=movies.image_name%>" required>
       <p class="validation-message">Please fill Movie Image Name</p>
 
       <br>

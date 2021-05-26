@@ -3,13 +3,10 @@ const path = require("path");
 const cors = require('cors');
 const mysql = require('mysql');
 const https = require('https');
-
+const fileupload = require('express-fileupload')
 
 const app = express();
-app.use(cors());
-
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(cors(),express.json(),express.urlencoded({extended: true}),fileupload());
 
 const viewsDirPath = path.join(__dirname, "client");
 app.set("view engine", "ejs");
@@ -45,9 +42,6 @@ app.get('/', (req, res) => {
   );
 });
 
-
-
-// App Routes
 app.get('/upcoming-movies', (req, res) => {
   const pageNumber = req.query.page;
 
@@ -58,15 +52,29 @@ app.get('/upcoming-movies', (req, res) => {
     });
 
     resp.on('end', () => {
-      res.render('upcoming-movies', { movies: JSON.parse(data) });
+      https.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=0e73c053f96903f9c84cf94862fc7e08`, (response) => {
+        let genresData = '';
+        response.on('data', (chunk) => {
+          genresData += chunk;
+        });
+
+        response.on('end', () => {
+          const genres=JSON.parse(genresData)['genres'];
+          const movies=JSON.parse(data);
+
+          movies.results.map(result=>{
+            result.original_language=(result.original_language=='en')?'English':(result.original_language=='fr')?'French':(result.original_language=='te')?'Telugu':'Hindi';
+
+            result['genre']=genres.filter(genre=>genre.id==result.genre_ids[0])[0].name
+          })
+          res.render('upcoming-movies', { movies: movies });
+        });
+      })
     });
   }).on("error", (err) => {
     console.log("Error: " + err.message);
   });
 });
-
-
-
 
 app.get('/login', (request, response) => {
   response.render('login');
@@ -105,8 +113,6 @@ app.post('/loginUser', (req, res) => {
   );
 });
 
-
-
 app.get('/admin', (req, res) => {
   dbConnection.query(
     `SELECT role from users where id='${req.query.userId}'`,
@@ -140,8 +146,6 @@ app.get('/admin', (req, res) => {
   );
 })
 
-
-
 app.get('/profile', (req, res) => {
   dbConnection.query(
     `SELECT name, address, phone_number, email, password ,role FROM users WHERE id='${req.query.userId}'`,
@@ -155,6 +159,7 @@ app.get('/profile', (req, res) => {
   )
 });
 
+
 app.post('/update_profile', (req, res) => {
   dbConnection.query(
     `UPDATE users SET name='${req.body.Name}', address='${req.body.Address}', phone_number='${req.body.PhoneNumber}', email='${req.body.Email}', password='${req.body.Password}' WHERE id='${req.body.userId}'`,
@@ -164,7 +169,7 @@ app.post('/update_profile', (req, res) => {
       };
 
       if (success) {
-      
+
         res.send(success)
       }
     }
@@ -179,8 +184,21 @@ app.get('/create_movie', (req, res) => {
 
 
 app.post('/create_movie', (req, res) => {
+  const image=req.files.myFile;
+  const path=__dirname + '/public/images/' + image.name;
+
+  image.mv(path, (error) => {
+    if (error) {
+      res.writeHead(500, {
+        'Content-Type': 'application/json'
+      })
+      res.end(JSON.stringify({ status: 'error', message: error }))
+      return
+    }
+  })
+
   dbConnection.query(
-    `INSERT INTO movies (name, description, genre, language, amount, image_name) VALUES ('${req.body.name}', '${req.body.description}', '${req.body.genre}', '${req.body.language}', '${req.body.amount}', '${req.body.imageName}')`,
+    `INSERT INTO movies (name, description, genre, language, amount, image_name) VALUES ('${req.body.name}', '${req.body.description}', '${req.body.genre}', '${req.body.language}', '${req.body.amount}', '${image.name}')`,
     (err, success) => {
       if (err) {
         res.send(err);
@@ -219,6 +237,25 @@ app.get('/customer_profiles', (req, res) => {
     }
   )
 })
+
+
+app.get('/update-movie', (req, res) => {
+  dbConnection.query(
+    `SELECT name, description, genre, language, amount , image_name FROM movies WHERE id='${req.query.movieId}'`,
+    (err, success) => {
+      if (err) throw err;
+
+      if (success) {
+        res.render('update-movie', { movies: success[0] })
+      }
+    }
+  )
+});
+
+app.get('/seats', (request, response) => {
+  response.render('seats');
+})
+
 
 app.listen(process.env.port || 3000);
 console.log('Web Server is listening at port '+ (process.env.port || 3000));

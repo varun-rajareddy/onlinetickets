@@ -92,7 +92,7 @@ function updateProfile(event) {
   const PhoneNumber = $('#phonenumber_field').val();
   const Email = $('#Email_field').val();
   const Password = $('#password_field').val();
-const confirmPassword = $('#confirm_password_field').val();
+  const confirmPassword = $('#confirm_password_field').val();
 
   if (!Name || !Address || !PhoneNumber || !Email || !Password) {
     alert('Please fill the fields properly');
@@ -105,7 +105,7 @@ const confirmPassword = $('#confirm_password_field').val();
 
     return
   }
-  
+
   if (Password !== confirmPassword) {
     alert('Password and Confirm Password are not same');
 
@@ -223,7 +223,6 @@ function login(event) {
   }
 
 
-
   const loginParams = {email, password};
 
   $.post(`${url}/loginUser`, loginParams, (res) => {
@@ -252,12 +251,10 @@ function login(event) {
 }
 
 
-
-
 function gotoHome() {
   const role = localStorage.getItem('userRole')
   console.log(0)
-   console.log(role, role ==='employee')
+  console.log(role, role ==='employee')
   if(role ==='employee'){
     const userId = localStorage.getItem('userId');
     window.location.href =`/admin?userId=${userId}`;
@@ -293,21 +290,33 @@ function submitCreateMovie(event) {
   const genre = $('#genre').val();
   const language = $('#language').val();
   const amount = $('#amount').val();
-  const imageName = $('#image_name').val();
+  const image = $('#image_name')[0].files[0];
 
-  if (!name || !description || !genre || !language || !amount || !imageName) {
+  if (!name || !description || !genre || !language || !amount || !image) {
     alert('Please fill all fields properly');
     return;
   }
 
-  const movie = { name, description, genre, language, amount, imageName };
-  console.log(movie);
+  const formData = new FormData()
+  formData.append('myFile', image)
+  formData.append('name', name)
+  formData.append('description', description)
+  formData.append('genre', genre)
+  formData.append('language', language)
+  formData.append('amount', amount)
 
-  $.post(`${url}/create_movie`, movie, (res) => {
-    const userId = localStorage.getItem('userId');
-    window.location.href = `/admin?userId=${userId}`;
+  $.ajax({
+    type: 'POST',
+    url: `${url}/create_movie`,
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(data) {
+      const userId = localStorage.getItem('userId');
+      window.location.href = `/admin?userId=${userId}`;
 
-    alert('Created Movie successfully')
+      alert('Created Movie successfully')
+    }
   })
 }
 
@@ -335,3 +344,17 @@ function deleteMovie(movieId) {
     alert('Deleted Movie successfully')
   })
 }
+
+
+
+function updateMovie(movieId) {
+ window.location.href = `/update-movie?movieId=${movieId}`
+}
+
+function seats() {
+  window.location.href = '/seats?movieId=${movieId}'
+}
+
+
+
+

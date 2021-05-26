@@ -16,7 +16,7 @@ function loadUpcomingMovies(type) {
   if (pageNumber >= 1) {
     localStorage.setItem('pageNumber', pageNumber);
 
-    window.location.href = `/?page=${pageNumber}`;
+    window.location.href = `/upcoming-movies?page=${pageNumber}`;
   }
 }
 
@@ -47,8 +47,22 @@ $(document).ready(function(){
         w3AddClass(movies[i], "hide");
       }
     }
+
+    displayNoResults();
   });
 });
+
+function displayNoResults(){
+  $('#movies-container').children().remove('p');
+  if($('.filterDiv.show').length===0){
+    const pEle = document.createElement('p');
+    pEle.innerHTML='No Results Found';
+    pEle.style='padding:50px';
+    $('#movies-container')[0]?.appendChild(pEle);
+
+    $('#nav-buttons').hide();
+  }
+}
 
 function filterSelection(c) {
   console.log(c);
@@ -61,6 +75,8 @@ function filterSelection(c) {
     w3RemoveClass(x[i], "show");
     if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
   }
+
+  displayNoResults();
 }
 
 function w3AddClass(element, name) {

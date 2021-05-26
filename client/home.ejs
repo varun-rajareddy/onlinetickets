@@ -43,7 +43,7 @@
         </div>
 
         <div class="col-sm-10 text-left main-content">
-          <div class="col-md-12">
+          <div class="col-md-12" id="movies-container">
             <% movies.forEach(movie => { %>
               <div class="card movie-list filterDiv <%=movie.image_name%> <%=movie.genre%> <%=movie.language%>">
                 <img src="/images/<%=movie.image_name%>" class="card-img-top w-75 mx-auto" alt="<%=movie.image_name%>">
@@ -54,7 +54,7 @@
                     <p class="card-text mb-1"><span class="float-right"><b>Language: </b><%=movie.language%></P>
       <p class="card-text mb-1"><span class="float-right"><b>Genre: </b><%=movie.genre%></P>
 
-                  <button class="btn btn-sm btn-info">Book Now</button>
+                  <button class="btn btn-sm btn-info" onclick=seats()>Book Now</button>
                 </div>
               </div>
             <% }) %>
@@ -66,7 +66,7 @@
             <% } %>
           </div>
 
-          <div class="float-end">
+          <div class="float-end" id="nav-buttons">
             <button id="prev" class="btn btn-sm btn-info" onclick="loadMovies('prev')">Prev</button>
             <button id="next" class="btn btn-sm btn-info" onclick="loadMovies('next')">Next</button>
           </div>
