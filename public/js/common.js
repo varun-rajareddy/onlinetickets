@@ -360,3 +360,13 @@ function bookMovie(movieId){
   window.location.href=`/book-movie?movieId=${movieId}`;
 }
 
+function showBookingHistory(){
+  const userId = localStorage.getItem('userId');
+
+  if(!userId){
+    window.location.href='/login';
+    return
+  }
+
+  window.location.href=`/booking-history?userId=${userId}`;
+}

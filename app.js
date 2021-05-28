@@ -326,7 +326,18 @@ app.post('/reserve', (req, res) => {
   })
 });
 
+app.get('/booking-history', (req, res) => {
+  dbConnection.query(
+    `SELECT movies.name as movie_name, booking_history.number_of_tickets, booking_history.cost FROM movies LEFT JOIN booking_history ON booking_history.movie_id=movies.id WHERE booking_history.user_id='${req.query.userId}'`,
+    (err, success) => {
+      if (err) throw err;
 
+      if (success) {
+        res.render('booking-history', { bookingHistory: success })
+      }
+    }
+  )
+});
 
 app.listen(process.env.port || 3000);
 console.log('Web Server is listening at port '+ (process.env.port || 3000));
