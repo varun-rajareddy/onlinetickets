@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My Shows</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/seats.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/home.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/seats.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+  
+
+
+
+  </head>
+  <body>
+    <%- include('header'); -%>
+
+    <div class="container-fluid">
+      <div id="book-movie">
+        <div class="details">
+          <img src="/images/<%=movie.image_name%>" class="card-img-top" alt="<%=movie.image_name%>">
+          <div class="card-body p-2">
+            <h4 class="card-title mb-1"><%=movie.name%></h4>
+            <p class="card-text mb-1"><%=movie.description%></p>
+            <p class="card-text mb-1"><b>Price per ticket: </b>$<span id="amount"><%=movie.amount%></span></p>
+            <p class="card-text mb-1"><b>Language: </b><%=movie.language%></p>
+            <p class="card-text mb-1"><b>Genre: </b><%=movie.genre%></p>
+          </div>
+        </div>
+
+        <ul class="showcase">
+          <li>
+            <div class="seat"></div>
+            <small>N/A</small>
+          </li>
+          <li>
+            <div class="seat selected"></div>
+            <small>Selected</small>
+          </li>
+          <li>
+            <div class="seat occupied"></div>
+            <small>Occupied</small>
+          </li>
+        </ul>
+
+        <div class="container-seats">
+          <% movie.seats.forEach(seatRow => { %>
+            <div class="row">
+              <% seatRow.forEach(seat => { %>
+                <div class="seat <%=seat.status%>"></div>
+              <% }) %>
+            </div>
+          <% }) %>
+        </div>
+
+        <p class="text">
+          You have selected <span id="count">0</span> seats for a price of $<span id="price">0</span>
+        </p>
+
+        <button class="btn btn-sm btn-info float-right mb-4" onclick="payToReserveMovie('<%=movie.id%>')">Pay to Reserve</button>
+      </div>
+
+      <div id="proceed-payment">
+        <div class="container_form" >
+          <label for="card_number_field"><b>Card Number</b></label>
+          <input type="text" placeholder="XXXX XXXX XXXX XXXX" id="card_number_field" onblur="onCardNumberInputFieldChange(event)" required>
+          <p class="validation-message">Please enter proper Card Number</p>
+
+          <label for="cvv_field"><b>CVV</b></label>
+          <input type="text" placeholder="XXX" id="cvv_field" onblur="onCvvInputFieldChange(event)" required>
+          <p class="validation-message">Please enter proper CVV</p>
+
+          <label for="expiry_date_field"><b>Expiry Date</b></label>
+          <input type="date" id="expiry_date_field" onblur="onInputFieldChange(event)" required>
+          <p class="validation-message">Please select Expiry Date</p>
+        </div>
+
+        <button class="btn btn-sm btn-info float-right mb-4" onclick="reserveMovie('<%=movie.id%>')"> Reserve</button>
+      </div>
+    </div>
+
+    <%- include('footer'); -%>
+  </body>
+</html>

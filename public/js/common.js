@@ -345,16 +345,18 @@ function deleteMovie(movieId) {
   })
 }
 
-
-
 function updateMovie(movieId) {
  window.location.href = `/update-movie?movieId=${movieId}`
 }
 
-function seats() {
-  window.location.href = '/seats?movieId=${movieId}'
+function bookMovie(movieId){
+  const userId = localStorage.getItem('userId');
+
+  if(!userId){
+    window.location.href='/login';
+    return
+  }
+
+  window.location.href=`/book-movie?movieId=${movieId}`;
 }
-
-
-
 

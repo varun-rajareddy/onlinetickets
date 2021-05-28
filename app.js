@@ -176,8 +176,6 @@ app.post('/update_profile', (req, res) => {
   );
 });
 
-
-
 app.get('/create_movie', (req, res) => {
   res.render('create-movie');
 });
@@ -198,16 +196,27 @@ app.post('/create_movie', (req, res) => {
   })
 
   dbConnection.query(
-    `INSERT INTO movies (name, description, genre, language, amount, image_name) VALUES ('${req.body.name}', '${req.body.description}', '${req.body.genre}', '${req.body.language}', '${req.body.amount}', '${image.name}')`,
+    `SELECT id FROM theaters ORDER BY RAND() LIMIT 1`,
     (err, success) => {
-      if (err) {
-        res.send(err);
-      };
+      if (err) throw err;
+
       if (success) {
-        res.send(success)
+        const theater_id=success[0].id;
+
+        dbConnection.query(
+          `INSERT INTO movies (name, description, genre, language, amount, image_name, theater_id) VALUES ('${req.body.name}', '${req.body.description}', '${req.body.genre}', '${req.body.language}', '${req.body.amount}', '${image.name}', '${theater_id}')`,
+          (err, success) => {
+            if (err) {
+              res.send(err);
+            };
+            if (success) {
+              res.send(success)
+            }
+          }
+        );
       }
     }
-  );
+  )
 });
 
 app.post('/delete_movie', (req, res) => {
@@ -252,9 +261,71 @@ app.get('/update-movie', (req, res) => {
   )
 });
 
-app.get('/seats', (request, response) => {
-  response.render('seats');
+app.get('/book-movie', (req, res) => {
+  dbConnection.query(
+    `SELECT * FROM movies WHERE id='${req.query.movieId}'`,
+    (err, success) => {
+      if (err) throw err;
+
+      if (success) {
+        const movie = success[0];
+
+        dbConnection.query(
+          `SELECT * FROM seats WHERE theater_id='${movie.theater_id}'`,
+          (err, success) => {
+            if (err) throw err;
+
+            if (success) {
+              var seats=[], chunkSize=8;
+
+              success.forEach((item)=>{
+                if(!seats.length || seats[seats.length-1].length == chunkSize)
+                  seats.push([]);
+
+                seats[seats.length-1].push(item);
+              });
+
+              movie['seats']=seats;
+              res.render('book-movie', { movie: movie })
+            }
+          }
+        )
+      }
+    }
+  )
 })
+
+app.post('/reserve', (req, res) => {
+  const selectedSeats = JSON.parse(req.body.selectedSeats);
+  const totalPrice=Number(selectedSeats.length*req.body.ticket_price);
+
+  selectedSeats.forEach((seat,index)=>{
+    dbConnection.query(
+      `UPDATE seats SET status='occupied' where seat_number='${seat}'`,
+      (err, success) => {
+        if (err) {
+          res.send(err);
+        };
+
+        if (success && (selectedSeats.length-1 === index)) {
+          dbConnection.query(
+            `INSERT INTO booking_history (user_id, movie_id, number_of_tickets, cost) VALUES ('${req.body.user_id}', '${req.body.movie_id}', '${selectedSeats.length}', '${totalPrice}')`,
+            (err, success) => {
+              if (err) {
+                res.send(err);
+              };
+
+              if (success) {
+                res.send(success)
+              }
+            }
+          );
+        }
+      }
+    );
+  })
+});
+
 
 
 app.listen(process.env.port || 3000);
