@@ -42,96 +42,57 @@ CREATE TABLE `seats` (
   `theater_id` INT NOT NULL,
   PRIMARY KEY (`id`)
 );
-
-
+-- Start seat_number from 0 and on (Ex: 0,1,2,...48)
+INSERT INTO seats (seat_number, status, theater_id) values (0, 'empty', 1);
 INSERT INTO seats (seat_number, status, theater_id) values (1, 'empty', 1);
 INSERT INTO seats (seat_number, status, theater_id) values (2, 'empty', 1);
 INSERT INTO seats (seat_number, status, theater_id) values (3, 'empty', 1);
 INSERT INTO seats (seat_number, status, theater_id) values (4, 'empty', 1);
 INSERT INTO seats (seat_number, status, theater_id) values (5, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (6, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (7, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (8, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (9, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (10, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (11, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (12, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (13, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (14, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (15, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (16, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (17, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (18, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (19, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (20, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (21, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (22, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (23, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (24, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (25, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (26, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (27, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (28, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (29, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (30, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (31, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (32, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (33, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (34, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (35, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (36, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (37, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (38, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (39, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (40, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (41, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (42, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (43, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (44, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (45, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (46, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (47, 'empty', 1);
-INSERT INTO seats (seat_number, status, theater_id) values (48, 'empty', 1);
 
-
+INSERT INTO seats (seat_number, status, theater_id) values (0, 'empty', 2);
 INSERT INTO seats (seat_number, status, theater_id) values (1, 'empty', 2);
 INSERT INTO seats (seat_number, status, theater_id) values (2, 'empty', 2);
 INSERT INTO seats (seat_number, status, theater_id) values (3, 'empty', 2);
 INSERT INTO seats (seat_number, status, theater_id) values (4, 'empty', 2);
 INSERT INTO seats (seat_number, status, theater_id) values (5, 'empty', 2);
 
+INSERT INTO seats (seat_number, status, theater_id) values (0, 'empty', 3);
 INSERT INTO seats (seat_number, status, theater_id) values (1, 'empty', 3);
 INSERT INTO seats (seat_number, status, theater_id) values (2, 'empty', 3);
 INSERT INTO seats (seat_number, status, theater_id) values (3, 'empty', 3);
 INSERT INTO seats (seat_number, status, theater_id) values (4, 'empty', 3);
 INSERT INTO seats (seat_number, status, theater_id) values (5, 'empty', 3);
 
+INSERT INTO seats (seat_number, status, theater_id) values (0, 'empty', 4);
 INSERT INTO seats (seat_number, status, theater_id) values (1, 'empty', 4);
 INSERT INTO seats (seat_number, status, theater_id) values (2, 'empty', 4);
 INSERT INTO seats (seat_number, status, theater_id) values (3, 'empty', 4);
 INSERT INTO seats (seat_number, status, theater_id) values (4, 'empty', 4);
 INSERT INTO seats (seat_number, status, theater_id) values (5, 'empty', 4);
 
+INSERT INTO seats (seat_number, status, theater_id) values (0, 'empty', 5);
 INSERT INTO seats (seat_number, status, theater_id) values (1, 'empty', 5);
 INSERT INTO seats (seat_number, status, theater_id) values (2, 'empty', 5);
 INSERT INTO seats (seat_number, status, theater_id) values (3, 'empty', 5);
 INSERT INTO seats (seat_number, status, theater_id) values (4, 'empty', 5);
 INSERT INTO seats (seat_number, status, theater_id) values (5, 'empty', 5);
 
+INSERT INTO seats (seat_number, status, theater_id) values (0, 'empty', 6);
 INSERT INTO seats (seat_number, status, theater_id) values (1, 'empty', 6);
 INSERT INTO seats (seat_number, status, theater_id) values (2, 'empty', 6);
 INSERT INTO seats (seat_number, status, theater_id) values (3, 'empty', 6);
 INSERT INTO seats (seat_number, status, theater_id) values (4, 'empty', 6);
 INSERT INTO seats (seat_number, status, theater_id) values (5, 'empty', 6);
 
-
 -- booking history
 CREATE TABLE `booking_history` (
   `id` INT NOT NULL auto_increment UNIQUE,
   `user_id` INT NOT NULL,
   `movie_id` INT NOT NULL,
-  `number_of_tickets` INT NOT NULL,
+  `seat_numbers` VARCHAR(35) NOT NULL,
   `cost` INT NOT NULL,
+  `created_at`  VARCHAR(100),
   PRIMARY KEY (`id`)
 );
 

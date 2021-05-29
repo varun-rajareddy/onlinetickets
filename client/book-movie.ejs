@@ -13,13 +13,6 @@
     <script src="/js/home.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/seats.js"></script>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-  
-
-
-
   </head>
   <body>
     <%- include('header'); -%>
@@ -52,7 +45,7 @@
           </li>
         </ul>
 
-        <div class="container-seats">
+        <div class="container">
           <% movie.seats.forEach(seatRow => { %>
             <div class="row">
               <% seatRow.forEach(seat => { %>
@@ -70,7 +63,7 @@
       </div>
 
       <div id="proceed-payment">
-        <div class="container_form" >
+        <div class="container_form">
           <label for="card_number_field"><b>Card Number</b></label>
           <input type="text" placeholder="XXXX XXXX XXXX XXXX" id="card_number_field" onblur="onCardNumberInputFieldChange(event)" required>
           <p class="validation-message">Please enter proper Card Number</p>
@@ -80,11 +73,12 @@
           <p class="validation-message">Please enter proper CVV</p>
 
           <label for="expiry_date_field"><b>Expiry Date</b></label>
-          <input type="date" id="expiry_date_field" onblur="onInputFieldChange(event)" required>
+          <!-- Hard code the date of your demo like as below -->
+          <input type="date" id="expiry_date_field" onblur="onInputFieldChange(event)" required min="2021-05-29">
           <p class="validation-message">Please select Expiry Date</p>
         </div>
-
         <button class="btn btn-sm btn-info float-right mb-4" onclick="reserveMovie('<%=movie.id%>')"> Reserve</button>
+        <button class="btn btn-sm btn-info float-right mb-4 mr-4" onclick="goBack()">Back</button>
       </div>
     </div>
 

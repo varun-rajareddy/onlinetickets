@@ -219,6 +219,39 @@ app.post('/create_movie', (req, res) => {
   )
 });
 
+app.post('/update_movie', (req, res) => {
+  let image,path;
+  let image_name=req.body.image_name;
+
+  if(req.files && req.files.myFile){
+    image=req.files.myFile;
+    path=__dirname + '/public/images/' + image.name;
+    image_name = image.name;
+
+    image.mv(path, (error) => {
+      if (error) {
+        res.writeHead(500, {
+          'Content-Type': 'application/json'
+        })
+        res.end(JSON.stringify({ status: 'error', message: error }))
+        return
+      }
+    })
+  }
+
+  dbConnection.query(
+    `UPDATE movies SET name='${req.body.name}', description='${req.body.description}', genre='${req.body.genre}', language='${req.body.language}', amount='${req.body.amount}', image_name='${image_name}' WHERE id='${req.body.movie_id}'`,
+    (err, success) => {
+      if (err) {
+        res.send(err);
+      };
+      if (success) {
+        res.send(success)
+      }
+    }
+  );
+});
+
 app.post('/delete_movie', (req, res) => {
   dbConnection.query(
     `DELETE FROM movies where id='${req.body.movieId}'`,
@@ -236,7 +269,7 @@ app.post('/delete_movie', (req, res) => {
 
 app.get('/customer_profiles', (req, res) => {
   dbConnection.query(
-    `SELECT users.name, users.address, users.phone_number, users.email FROM users where users.role='customer'`,
+    `SELECT users.name, users.address, users.phone_number, users.email, users.id FROM users where users.role='customer'`,
     (err, success) => {
       if (err) throw err;
 
@@ -250,7 +283,7 @@ app.get('/customer_profiles', (req, res) => {
 
 app.get('/update-movie', (req, res) => {
   dbConnection.query(
-    `SELECT name, description, genre, language, amount , image_name FROM movies WHERE id='${req.query.movieId}'`,
+    `SELECT id, name, description, genre, language, amount , image_name FROM movies WHERE id='${req.query.movieId}'`,
     (err, success) => {
       if (err) throw err;
 
@@ -309,7 +342,7 @@ app.post('/reserve', (req, res) => {
 
         if (success && (selectedSeats.length-1 === index)) {
           dbConnection.query(
-            `INSERT INTO booking_history (user_id, movie_id, number_of_tickets, cost) VALUES ('${req.body.user_id}', '${req.body.movie_id}', '${selectedSeats.length}', '${totalPrice}')`,
+            `INSERT INTO booking_history (user_id, movie_id, seat_numbers, cost, created_at) VALUES ('${req.body.user_id}', '${req.body.movie_id}', '${req.body.selectedSeats}', '${totalPrice}', '${new Date().toDateString()}')`,
             (err, success) => {
               if (err) {
                 res.send(err);
@@ -328,12 +361,25 @@ app.post('/reserve', (req, res) => {
 
 app.get('/booking-history', (req, res) => {
   dbConnection.query(
-    `SELECT movies.name as movie_name, booking_history.number_of_tickets, booking_history.cost FROM movies LEFT JOIN booking_history ON booking_history.movie_id=movies.id WHERE booking_history.user_id='${req.query.userId}'`,
+    `SELECT movies.name as movie_name, booking_history.seat_numbers, booking_history.cost, booking_history.created_at FROM movies LEFT JOIN booking_history ON booking_history.movie_id=movies.id WHERE booking_history.user_id='${req.query.userId}'`,
     (err, success) => {
       if (err) throw err;
 
       if (success) {
         res.render('booking-history', { bookingHistory: success })
+      }
+    }
+  )
+});
+
+app.get('/customer-booking-history', (req, res) => {
+  dbConnection.query(
+    `SELECT movies.name as movie_name, booking_history.seat_numbers, booking_history.cost, booking_history.created_at FROM movies LEFT JOIN booking_history ON booking_history.movie_id=movies.id WHERE booking_history.user_id='${req.query.userId}'`,
+    (err, success) => {
+      if (err) throw err;
+
+      if (success) {
+        res.render('admin-booking-history', { bookingHistory: success })
       }
     }
   )

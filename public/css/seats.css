@@ -50,7 +50,7 @@ body {
   border-radius: 5px;
 }
 
-.container-seats {
+.container {
   perspective: 1000px;
   margin: 40px 0;
   display: flex;

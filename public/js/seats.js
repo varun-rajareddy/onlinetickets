@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  const container = document.querySelector('.container-seats');
+  const container = document.querySelector('.container');
   const seats = document.querySelectorAll('.row .seat:not(.occupied)');
   const count = document.getElementById('count');
   const price = document.getElementById('price');
@@ -28,8 +28,9 @@ $(document).ready(function(){
 
   const updateSelectedSeatsCount = () => {
     const selectedSeats = document.querySelectorAll('.row .selected');
+    const allSeats = document.querySelectorAll('.row .seat');
 
-    const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat));
+    const seatsIndex = [...selectedSeats].map(seat => [...allSeats].indexOf(seat));
 
     localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 
@@ -105,4 +106,9 @@ function reserveMovie(movieId) {
     localStorage.removeItem('selectedSeats');
     window.location.href='/'
   });
+}
+
+function goBack(){
+  $('#book-movie').show();
+  $('#proceed-payment').hide();
 }

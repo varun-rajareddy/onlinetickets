@@ -280,8 +280,6 @@ function createMovie() {
   window.location.href = '/create_movie'
 }
 
-
-
 function submitCreateMovie(event) {
   event.preventDefault();
 
@@ -319,6 +317,67 @@ function submitCreateMovie(event) {
     }
   })
 }
+
+function onImageInputFieldChange(event){
+  if (event.target.value) {
+    $('#image_name').hide();
+    $(event.target).next().removeClass('toggle');
+  } else {
+    $(event.target).next().addClass('toggle');
+  }
+}
+
+function submitUpdateMovie(event,movieId) {
+  console.log(movieId);
+  event.preventDefault();
+
+  const name = $('#name').val();
+  const description = $('#description').val();
+  const genre = $('#genre').val();
+  const language = $('#language').val();
+  const amount = $('#amount').val();
+  const image_name = $('#image_name')[0].innerHTML;
+  let image;
+
+  if ($('#image') && $('#image')[0] && $('#image')[0].files){
+    image = $('#image')[0].files[0];
+  }
+
+
+  if (!name || !description || !genre || !language || !amount) {
+    console.log(name, description, genre, language, amount);
+    alert('Please fill all fields properly');
+    return;
+  }
+
+  const formData = new FormData()
+  formData.append('name', name)
+  formData.append('description', description)
+  formData.append('genre', genre)
+  formData.append('language', language)
+  formData.append('amount', amount)
+  formData.append('image_name', image_name)
+  formData.append('movie_id', movieId)
+
+  if(image){
+    formData.append('myFile', image)
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: `${url}/update_movie`,
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(data) {
+      const userId = localStorage.getItem('userId');
+      window.location.href = `/admin?userId=${userId}`;
+
+      alert('Updated Movie successfully')
+    }
+  })
+}
+
 
 function getProfile() {
   const userId = localStorage.getItem('userId');

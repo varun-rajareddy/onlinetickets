@@ -33,8 +33,8 @@
       <label for="type"><b>Genre</b></label>
       <p>
         <select name="genre" class="btn-create" id="genre" onchange="onInputFieldChange(event)">
-          <option disabled selected value=''>Genre</option>
-          <% ['Action', 'Adventure', 'Animation', 'Comedy', 'Family', 'Fantasy', 'Horror', 'Romance','Thriller'].forEach(genre => { %>
+          <option selected value="<%= movies.genre %>"><%= movies.genre %></option>
+          <% ['Action', 'Adventure', 'Animation', 'Comedy', 'Family', 'Fantasy', 'Horror', 'Romance','Thriller'].filter(genre=> genre!== movies.genre).forEach(genre => { %>
             <option value="<%= genre %>" class="dropdown-options"><%= genre %></option>
           <% }) %>
         </select>
@@ -44,8 +44,8 @@
       <label for="model"><b>Language</b></label>
       <p>
         <select name="language" class="btn-create" id="language" onchange="onInputFieldChange(event)">
-          <option disabled selected value=''>Language</option>
-          <% ['English', 'French', 'Hindi', 'Telugu'].forEach(language => { %>
+          <option selected value="<%= movies.language %>"><%= movies.language %></option>
+          <% ['English', 'French', 'Hindi', 'Telugu'].filter(language=> language!== movies.language).forEach(language => { %>
             <option value="<%= language %>" class="dropdown-options"><%= language %></option>
           <% }) %>
         </select>
@@ -56,13 +56,14 @@
       <input type="number" placeholder="Enter ticket Amount" id="amount" min="0" minlength="4" maxlength="4" onblur="onInputFieldChange(event)"  value="<%=movies.amount%>" required>
       <p class="validation-message">Please fill ticket price</p>
 
-      <label for="image_name"><b>Image Name</b></label>
-      <input type="text" placeholder="Enter movie Image Name" id="image_name" onblur="onInputFieldChange(event)"   value="<%=movies.image_name%>" required>
+      <label for="image"><b>Image</b></label>
+      <input type="file" placeholder="Uplaod movie Image" id="image" onblur="onImageInputFieldChange(event)" required>
+      <span id="image_name"><%=movies.image_name%></span>
       <p class="validation-message">Please fill Movie Image Name</p>
 
       <br>
 
-      <button class="login_btn" type="button" onclick="submitCreateMovie(event)">ADD</button>
+      <button class="login_btn" type="button" onclick='submitUpdateMovie(event,"<%=movies.id%>")'>ADD</button>
     </div>
 
     <br>
