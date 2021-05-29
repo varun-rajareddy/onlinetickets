@@ -81,7 +81,7 @@ function onCvvInputFieldChange(event) {
   }
 }
 
-function reserveMovie(movieId) {
+function reserveMovie(movieId,theaterId) {
   const cardNumber = $('#card_number_field').val();
   const cvv = $('#cvv_field').val();
   const expiryDate = $('#expiry_date_field').val();
@@ -100,6 +100,7 @@ function reserveMovie(movieId) {
     user_id:localStorage.getItem('userId'),
     movie_id:movieId,
     ticket_price:ticketPrice,
+    theater_id:theaterId
   };
   $.post(`${url}/reserve`, details, (res) => {
     alert('Tickets reserved successfully');

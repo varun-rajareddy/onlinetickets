@@ -77,7 +77,7 @@
           <input type="date" id="expiry_date_field" onblur="onInputFieldChange(event)" required min="2021-05-29">
           <p class="validation-message">Please select Expiry Date</p>
         </div>
-        <button class="btn btn-sm btn-info float-right mb-4" onclick="reserveMovie('<%=movie.id%>')"> Reserve</button>
+        <button class="btn btn-sm btn-info float-right mb-4" onclick="reserveMovie('<%=movie.id%>','<%=movie.theater_id%>')"> Reserve</button>
         <button class="btn btn-sm btn-info float-right mb-4 mr-4" onclick="goBack()">Back</button>
       </div>
     </div>

@@ -334,7 +334,7 @@ app.post('/reserve', (req, res) => {
 
   selectedSeats.forEach((seat,index)=>{
     dbConnection.query(
-      `UPDATE seats SET status='occupied' where seat_number='${seat}'`,
+      `UPDATE seats SET status='occupied' WHERE seat_number='${seat}' AND theater_id='${req.body.theater_id}'`,
       (err, success) => {
         if (err) {
           res.send(err);
