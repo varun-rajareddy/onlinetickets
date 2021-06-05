@@ -30,27 +30,27 @@
       <hr>
 
        <label for="name"><b>Name</b></label>
-        <input type="text" placeholder="Enter Name" id="name_field"  value="<%=user.name%>" onblur="onInputFieldChange(event)" required>
+        <input type="text" placeholder="Enter Name" id="name_field"  value="<%=user.name%>" onblur="onInputFieldChange(event)">
         <p class="validation-message">Please fill name</p>
 
         <label for="address"><b>Address</b></label>
-        <input type="text" placeholder="Enter Address" id="address_field"  value="<%=user.address%>" onblur="onInputFieldChange(event)" required>
+        <input type="text" placeholder="Enter Address" id="address_field"  value="<%=user.address%>" onblur="onInputFieldChange(event)">
         <p class="validation-message">Please fill address</p>
 
         <label for="Phone Number"><b>Phone Number</b></label>
-        <input type="text" placeholder="Enter Phone Number" id="phonenumber_field" maxlength="11" value="<%=user.phone_number%>" onblur="onInputFieldChange(event)" required>
+        <input type="text" placeholder="Enter Phone Number" id="phonenumber_field" maxlength="11" value="<%=user.phone_number%>" onblur="onInputFieldChange(event)">
         <p class="validation-message">Please fill phone number</p>
 
         <label for="Email"><b>Email</b></label>
-        <input type="email" placeholder="Enter Email" id="Email_field" value="<%=user.email%>"  onblur="validateEmail(event)" required>
+        <input type="email" placeholder="Enter Email" id="Email_field" value="<%=user.email%>"  onblur="validateEmail(event)">
         <p class="validation-message">Please fill proper email</p>
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" id="password_field" value="<%=user.password%>" onblur="onInputFieldChange(event)" required>
+        <input type="password" placeholder="Enter Password" id="password_field" value="<%=user.password%>" onblur="onInputFieldChange(event)">
         <p class="validation-message">Please fill password</p>
 
         <label for="psw-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" id="confirm_password_field"  value="<%=user.password%>" onblur="onConfirmPasswordChange(event)" required>
+        <input type="password" placeholder="Repeat Password" id="confirm_password_field"  value="<%=user.password%>" onblur="onConfirmPasswordChange(event)">
         <p class="validation-message">Password and Confirm Password are not same</p>
 
       <button class="updatebtn" type="button" onclick="updateProfile(event)">Update</button>
