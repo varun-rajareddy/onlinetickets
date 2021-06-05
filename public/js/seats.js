@@ -60,6 +60,12 @@ function payToReserveMovie(){
     alert('Please select seats before proceeding to Payment');
     return
   } else {
+    if (JSON.parse(selectedSeats)?.length>7){
+      alert('Maximum 6 seats are allowed');
+
+      return
+    }
+
     $('#book-movie').hide();
     $('#proceed-payment').show();
   }
