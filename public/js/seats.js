@@ -60,7 +60,7 @@ function payToReserveMovie(){
     alert('Please select seats before proceeding to Payment');
     return
   } else {
-    if (JSON.parse(selectedSeats)?.length>7){
+    if (JSON.parse(selectedSeats)?.length>6){
       alert('Maximum 6 seats are allowed');
 
       return
